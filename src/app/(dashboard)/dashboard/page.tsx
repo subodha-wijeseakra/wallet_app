@@ -4,6 +4,7 @@ import {
 } from "@/app/actions/transaction";
 import { AddTransactionDialog } from "@/components/add-transaction-dialog";
 import { EditTransactionDialog } from "@/components/edit-transaction-dialog";
+import { ReportDialog } from "@/components/report-dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { ArrowDownIcon, ArrowUpIcon, DollarSign } from "lucide-react";
@@ -22,6 +23,7 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between space-y-2">
                 <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
                 <div className="flex items-center space-x-2">
+                    <ReportDialog />
                     <AddTransactionDialog />
                 </div>
             </div>

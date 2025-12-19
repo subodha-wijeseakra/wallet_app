@@ -153,3 +153,23 @@ export async function updateTransaction(
     return { success: true };
 }
 
+
+export async function getTransactionsByDate(startDate: Date, endDate: Date) {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user) {
+        throw new Error("Unauthorized");
+    }
+
+    await dbConnect();
+
+    const transactions = await Transaction.find({
+        userId: session.user.id,
+        date: {
+            $gte: startDate,
+            $lte: endDate,
+        },
+    }).sort({ date: -1 });
+
+    return JSON.parse(JSON.stringify(transactions));
+}
