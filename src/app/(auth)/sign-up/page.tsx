@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mail, Lock, User } from "lucide-react";
 import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function SignUpPage() {
@@ -49,21 +49,19 @@ export default function SignUpPage() {
     };
 
     return (
-        <div className="flex flex-col gap-6 w-full sm:w-[350px]">
-            <div className="flex flex-col space-y-2 text-center">
-                <h1 className="text-2xl font-semibold tracking-tight">
-                    Create an account
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                    Enter your information to create an account
-                </p>
-            </div>
-            <div className="grid gap-6 p-6 border rounded-xl bg-card shadow-sm text-card-foreground relative overflow-hidden">
-                <BorderBeam duration={6} delay={0} colorFrom="#3b82f6" colorTo="#06b6d4" />
+        <div className="flex flex-col space-y-2 text-center">
+            <h1 className="text-2xl font-semibold tracking-tight">
+                Create an account
+            </h1>
+            <p className="text-sm text-muted-foreground">
+                Enter your details below to create your account
+            </p>
+
+            <div className="grid gap-6 py-6">
                 <form onSubmit={handleSubmit}>
                     <div className="grid gap-4">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Name</Label>
+                        <div className="grid gap-2 text-left">
+                            <Label htmlFor="name">Full Name</Label>
                             <Input
                                 id="name"
                                 placeholder="John Doe"
@@ -72,7 +70,7 @@ export default function SignUpPage() {
                                 required
                             />
                         </div>
-                        <div className="grid gap-2">
+                        <div className="grid gap-2 text-left">
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
@@ -86,7 +84,7 @@ export default function SignUpPage() {
                                 required
                             />
                         </div>
-                        <div className="grid gap-2">
+                        <div className="grid gap-2 text-left">
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
@@ -96,22 +94,44 @@ export default function SignUpPage() {
                                 required
                             />
                         </div>
-                        {error && <p className="text-sm text-red-500">{error}</p>}
+                        {error && (
+                            <div className="p-3 text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-md">
+                                {error}
+                            </div>
+                        )}
                         <Button className="w-full" type="submit" disabled={isLoading}>
                             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                            Sign Up
+                            Create Account
                         </Button>
                     </div>
                 </form>
+
+                <p className="px-8 text-center text-sm text-muted-foreground">
+                    <Link
+                        href="/sign-in"
+                        className="hover:text-brand underline underline-offset-4"
+                    >
+                        Already have an account? Sign In
+                    </Link>
+                </p>
+                <p className="px-8 text-center text-sm text-muted-foreground">
+                    By clicking continue, you agree to our{" "}
+                    <Link
+                        href="/terms"
+                        className="underline underline-offset-4 hover:text-primary"
+                    >
+                        Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                        href="/privacy"
+                        className="underline underline-offset-4 hover:text-primary"
+                    >
+                        Privacy Policy
+                    </Link>
+                    .
+                </p>
             </div>
-            <p className="px-8 text-center text-sm text-muted-foreground">
-                <Link
-                    href="/sign-in"
-                    className="hover:text-brand underline underline-offset-4"
-                >
-                    Already have an account? Sign In
-                </Link>
-            </p>
         </div>
     );
 }
